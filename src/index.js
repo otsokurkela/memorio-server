@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
+import usersRouter from './router/users-routes.js';
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ const corsOptions = { credentials: true, origin: process.env.URL || '*' };
 app.use(cors(corsOptions));
 app.use(json());
 app.use(cookieParser());
+
+app.use('/api/users', usersRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening in port ${PORT}`);
