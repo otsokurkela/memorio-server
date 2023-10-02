@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import usersRouter from './router/users-routes.js';
+
+import router from './router/router.js';
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ app.use(cors(corsOptions));
 app.use(json());
 app.use(cookieParser());
 
-app.use('/api/users', usersRouter);
+app.use('/api', router);
 
 app.listen(PORT, () => {
   console.log(`Server listening in port ${PORT}`);
