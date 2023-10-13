@@ -18,12 +18,13 @@ router.post('/login', async (request, response) => {
     if (!validPassword) return response.status(401).json({ error: 'Incorrect password' });
 
     let tokens = jwtTokens(users.rows[0]);
+    const userId = users.rows[0]['user_id'];
     response.cookie('refresh_token', tokens.refreshToken, {
       httpOnly: true,
       sameSite: 'none',
       secure: true
     });
-    response.json(tokens);
+    response.json({ tokens, userId });
   } catch (error) {
     response.status(401).json({ error: error.message });
     console.error(error);
