@@ -5,6 +5,7 @@ import { authenticateToken } from '../middleware/authorization.js';
 
 const router = express.Router();
 
+// Get data of a user logged in
 router.get('/', authenticateToken, async (request, response) => {
   try {
     const userId = request.user.user_id;
